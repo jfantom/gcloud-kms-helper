@@ -1,6 +1,6 @@
 # gcloud-kms-helper
 
-[![npm](https://img.shields.io/npm/v/gcloud-kms-helper.svg)](https://www.npmjs.com/package/gcloud-kms-helper)  [![Build Status](https://travis-ci.org/Travix-International/gcloud-kms-helper.svg?branch=master)](https://travis-ci.org/Travix-International/gcloud-kms-helper)
+[![npm](https://img.shields.io/npm/v/gcloud-kms-helper.svg)](https://www.npmjs.com/package/gcloud-kms-helper)  [![Build Status](https://travis-ci.org/jackTheRipper/gcloud-kms-helper.svg?branch=master)](https://travis-ci.org/jackTheRipper/gcloud-kms-helper)
 
 A simple NPM module for managing the encryption - decryption using [Google Cloud KMS](https://cloud.google.com/kms/docs/).
 
