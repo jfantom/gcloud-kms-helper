@@ -1,0 +1,27 @@
+{
+  "name": "gcloud-kms-helper",
+  "version": "0.0.1",
+  "description": "A simple encryptor - decryptor using KMS for the GCloud functions",
+  "main": "index.js",
+  "scripts": {
+    "test": "ava test/*"
+  },
+  "bin": {
+    "kms-helper": "./bin/kms-helper"
+  },
+  "keywords": [
+    "google-cloud-functions",
+    "google-cloud-kms"
+  ],
+  "author": "jbaudin",
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^2.11.0",
+    "googleapis": "^20.0.1"
+  },
+  "devDependencies": {
+    "ava": "^0.20.0",
+    "proxyquire": "^1.8.0",
+    "sinon": "^2.3.6"
+  }
+}

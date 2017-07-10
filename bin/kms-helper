@@ -1,0 +1,63 @@
+#!/usr/bin/env node
+
+var program = require('commander');
+var package = require('../package.json');
+
+var encrypt = require('../encrypt').encryptKey;
+var decrypt = require('../decrypt').decryptKey;
+
+var PROJECT_ID = process.env.PROJECT_ID || '';
+var LOCATION = process.env.PROJECT_LOCATION || 'europe-west1';
+var KEY_RING_NAME = process.env.KEY_RING_NAME || '';
+var CRYPTO_KEY_NAME = process.env.CRYPTO_KEY_NAME || '';
+
+program
+  .version(package.version);
+
+/**
+ * encrypt command
+ */
+program
+  .command('encrypt <message> output <filepath>')
+  .description('encrypt a message')
+  .option('-p, --project_id [value]', 'the Google Cloud Project to use')
+  .option('-l, --project_location [value]', 'the Google Cloud cluster location to use')
+  .option('-r, --key_ring_name [value]', 'the Google Cloud key ring name to use')
+  .option('-c, --crypto_key_name [value]', 'the Google Cloud crypto key to use')
+  .action((message, filepath, options) => {
+    var opts = {
+      PROJECT_ID: options.project_id || PROJECT_ID,
+      LOCATION: options.project_location || LOCATION,
+      KEY_RING_NAME: options.key_ring_name || KEY_RING_NAME,
+      CRYPTO_KEY_NAME: options.crypto_key_name || CRYPTO_KEY_NAME,
+    };
+
+    return encrypt(message, filepath, opts);
+  })
+  .command('decrypt <file>')
+  .action((file) => decrypt(file));
+
+/**
+ * decrypt command
+ */
+program
+  .command('decrypt <filepath>')
+  .description('decrypt a message')
+  .option('-p, --project_id [value]', 'the Google Cloud Project to use')
+  .option('-l, --project_location [value]', 'the Google Cloud cluster location to use')
+  .option('-r, --key_ring_name [value]', 'the Google Cloud key ring name to use')
+  .option('-c, --crypto_key_name [value]', 'the Google Cloud crypto key to use')
+  .action((filepath, options) => {
+    var opts = {
+      PROJECT_ID: options.project_id || PROJECT_ID,
+      LOCATION: options.project_location || LOCATION,
+      KEY_RING_NAME: options.key_ring_name || KEY_RING_NAME,
+      CRYPTO_KEY_NAME: options.crypto_key_name || CRYPTO_KEY_NAME,
+    };
+
+    return decrypt(filepath, opts)
+      .then(decryptedValue => console.log(`Decrypted value: ${decryptedValue}`))
+      .catch(err => console.error(`An error occured while decrypting: ${err.message}`));
+  });
+
+program.parse(process.argv);
