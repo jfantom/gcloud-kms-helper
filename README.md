@@ -97,10 +97,10 @@ encrypt(message, outputFile, options)
 process.env.GOOGLE_APPLICATION_CREDENTIALS = '~/path/to/my/cred';
 
 const options = {
-  PROJECT_ID: process.env.PROJECT_ID || 'my-project',
-  LOCATION: process.env.PROJECT_LOCATION || 'europe-west1',
-  KEY_RING_NAME: process.env.KEY_RING_NAME || 'key-ring-name',
-  CRYPTO_KEY_NAME: process.env.CRYPTO_KEY_NAME || 'crypto-key-name',
+  project_id: process.env.PROJECT_ID || 'my-project',
+  location: process.env.PROJECT_LOCATION || 'europe-west1',
+  key_ring_name: process.env.KEY_RING_NAME || 'key-ring-name',
+  crypto_key_name: process.env.CRYPTO_KEY_NAME || 'crypto-key-name',
 };
 
 const encrypt = require('gcloud-kms-helper').encrypt;
@@ -133,10 +133,10 @@ encrypt(message, outputFile, options)
 process.env.GOOGLE_APPLICATION_CREDENTIALS = '~/path/to/my/cred';
 
 const options = {
-  PROJECT_ID: process.env.PROJECT_ID || 'my-project',
-  LOCATION: process.env.PROJECT_LOCATION || 'europe-west1',
-  KEY_RING_NAME: process.env.KEY_RING_NAME || 'key-ring-name',
-  CRYPTO_KEY_NAME: process.env.CRYPTO_KEY_NAME || 'crypto-key-name',
+  project_id: process.env.PROJECT_ID || 'my-project',
+  location: process.env.PROJECT_LOCATION || 'europe-west1',
+  key_ring_name: process.env.KEY_RING_NAME || 'key-ring-name',
+  crypto_key_name: process.env.CRYPTO_KEY_NAME || 'crypto-key-name',
 };
 
 const decrypt = require('gcloud-kms-helper').decrypt;
