@@ -12,7 +12,7 @@ const decryptKey = require('./decrypt').decryptKey;
  * @throws {Error} If then env var `GOOGLE_APPLICATION_CREDENTIALS` doesn't exist rejects
  * @return {Promise}
  */
-function encrypt(message, ouputFile, options) {
+function encrypt(message, outputFile, options) {
   if (!process.env.GOOGLE_APPLICATION_CREDENTIALS) {
     return Promise.reject(new Error('The environment variable GOOGLE_APPLICATION_CREDENTIALS is required'));
   }
