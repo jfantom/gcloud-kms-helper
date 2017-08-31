@@ -1,7 +1,7 @@
 'use strict';
 
 const encryptKey = require('./encrypt').encryptKey;
-const decrypt = require('./decrypt');
+const decryptTools = require('./decrypt');
 
 /**
  * Encrypt a message and write the hash in a file
@@ -47,7 +47,7 @@ function decrypt(filepath, options) {
     CRYPTO_KEY_NAME: options.crypto_key_name || process.env.CRYPTO_KEY_NAME || '',
   };
 
-  return decrypt.decryptKey(filepath, opts);
+  return decryptTools.decryptKey(filepath, opts);
 }
 
 /**
@@ -70,7 +70,7 @@ function decryptFromBuffer(buff, options) {
     CRYPTO_KEY_NAME: options.crypto_key_name || process.env.CRYPTO_KEY_NAME || '',
   };
 
-  return decrypt.decryptKeyFromBuffer(buff, opts);
+  return decryptTools.decryptKeyFromBuffer(buff, opts);
 }
 
 module.exports = {
