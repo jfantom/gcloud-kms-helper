@@ -1,6 +1,6 @@
 {
   "name": "gcloud-kms-helper",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "A simple encryptor - decryptor using KMS for the GCloud functions",
   "main": "index.js",
   "scripts": {
