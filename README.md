@@ -73,6 +73,8 @@ If you aren't using the environment variables or if you wanna override the value
 
 You can import the encrypt / decrypt methods in your script:
 
+---
+
 ```javascript
 encrypt(message, outputFile, options)
 ```
@@ -110,6 +112,8 @@ encrypt('my message to encrypt', './output.key', options)
   .catch((err) => console.error(`Something went wrong: ${err.message}`));
 ```
 
+---
+
 ```javascript
 decrypt(message, outputFile, options)
 ```
@@ -146,6 +150,8 @@ decrypt('./output.key', options)
   .catch((err) => console.error(`Something went wrong: ${err.message}`));
 ```
 
+---
+
 ```javascript
 decryptFromBuffer(message, outputFile, options)
 ```
@@ -181,6 +187,8 @@ decryptFromBuffer(Buffer.from('bXlzZWNyZXQK', 'base64'), options)
   .then((myDecryptedValue) => console.log(`The secret is: ${myDecryptedValue}`))
   .catch((err) => console.error(`Something went wrong: ${err.message}`));
 ```
+
+---
 
 Most of the possible scenario are described in the test directory of the module.
 
