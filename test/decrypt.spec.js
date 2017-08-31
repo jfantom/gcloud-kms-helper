@@ -48,10 +48,51 @@ test('decriptKey: success case', (t) => {
       CRYPTO_KEY_NAME: 'crypto_key_name',
     };
 
-    decryptKey('test', './therightone.key', opts)
+    decryptKey('./therightone.key', opts)
       .then((res) => {
         t.is(res.toString(), 'theEncryptedKey');
         t.truthy(readFileSpy.calledOnce);
+        t.truthy(decryptSpy.calledOnce);
+        resolve();
+      })
+      .catch(reject);
+  });
+});
+
+test('decriptKeyFromBuffer: success case', (t) => {
+  return new Promise((resolve, reject) => {
+    const decryptSpy = sandbox.spy((request, cb) => {
+      cb(null, {
+        plaintext: Buffer.from('theEncryptedKey').toString('base64'),
+      });
+    });
+
+    const decryptKeyFromBuffer = proxyquire('../decrypt', {
+      './getCredentials': {
+        getCredentials: () => Promise.resolve({
+          projects: {
+            locations: {
+              keyRings: {
+                cryptoKeys: {
+                  decrypt: decryptSpy,
+                },
+              },
+            },
+          },
+        }),
+      },
+    }).decryptKeyFromBuffer;
+
+    const opts = {
+      PROJECT_ID: 'project_id',
+      LOCATION: 'location',
+      KEY_RING_NAME: 'key_ring_name',
+      CRYPTO_KEY_NAME: 'crypto_key_name',
+    };
+
+    decryptKeyFromBuffer(Buffer.from('theEncryptedKey', 'utf8'), opts)
+      .then((res) => {
+        t.is(res.toString(), 'theEncryptedKey');
         t.truthy(decryptSpy.calledOnce);
         resolve();
       })

@@ -1,7 +1,7 @@
 'use strict';
 
 const encryptKey = require('./encrypt').encryptKey;
-const decryptKey = require('./decrypt').decryptKey;
+const decrypt = require('./decrypt');
 
 /**
  * Encrypt a message and write the hash in a file
@@ -47,10 +47,34 @@ function decrypt(filepath, options) {
     CRYPTO_KEY_NAME: options.crypto_key_name || process.env.CRYPTO_KEY_NAME || '',
   };
 
-  return decryptKey(filepath, opts);
+  return decrypt.decryptKey(filepath, opts);
+}
+
+/**
+ * Decrypt a given encrypted Buffer or string
+ * @param {string|Buffer} buff The data to decrypt
+ * @param {Object} options The options for Google Cloud
+ * 
+ * @throws {Error} If then env var `GOOGLE_APPLICATION_CREDENTIALS` doesn't exist rejects
+ * @return {Promise} 
+ */
+function decryptFromBuffer(buff, options) {
+  if (!process.env.GOOGLE_APPLICATION_CREDENTIALS) {
+    return Promise.reject(new Error('The environment variable GOOGLE_APPLICATION_CREDENTIALS is required'));
+  }
+
+  const opts = {
+    PROJECT_ID: options.project_id || process.env.PROJECT_ID || '',
+    LOCATION: options.project_location || process.env.PROJECT_LOCATION || 'europe-west1',
+    KEY_RING_NAME: options.key_ring_name || process.env.KEY_RING_NAME || '',
+    CRYPTO_KEY_NAME: options.crypto_key_name || process.env.CRYPTO_KEY_NAME || '',
+  };
+
+  return decrypt.decryptKeyFromBuffer(buff, opts);
 }
 
 module.exports = {
   decrypt,
+  decryptFromBuffer,
   encrypt,
 };

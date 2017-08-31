@@ -111,7 +111,7 @@ encrypt('my message to encrypt', './output.key', options)
 ```
 
 ```javascript
-encrypt(message, outputFile, options)
+decrypt(message, outputFile, options)
 ```
 
 #### argurments
@@ -142,6 +142,42 @@ const options = {
 const decrypt = require('gcloud-kms-helper').decrypt;
 
 decrypt('./output.key', options)
+  .then((myDecryptedValue) => console.log(`The secret is: ${myDecryptedValue}`))
+  .catch((err) => console.error(`Something went wrong: ${err.message}`));
+```
+
+```javascript
+decryptFromBuffer(message, outputFile, options)
+```
+
+#### argurments
+
+* `buff`: string or buffer. Required. The buffer or the string to decrypt.
+* `options`: object. Required. The options mentionned before.
+
+#### returned value
+
+* Promise
+
+```javascript
+'use strict';
+
+/**
+ * If you are using the module in a Google Cloud Function you will need the following *ugly* hack
+ */
+
+process.env.GOOGLE_APPLICATION_CREDENTIALS = '~/path/to/my/cred';
+
+const options = {
+  project_id: process.env.PROJECT_ID || 'my-project',
+  location: process.env.PROJECT_LOCATION || 'europe-west1',
+  key_ring_name: process.env.KEY_RING_NAME || 'key-ring-name',
+  crypto_key_name: process.env.CRYPTO_KEY_NAME || 'crypto-key-name',
+};
+
+const decryptFromBuffer = require('gcloud-kms-helper').decryptFromBuffer;
+
+decryptFromBuffer(Buffer.from('bXlzZWNyZXQK', 'base64'), options)
   .then((myDecryptedValue) => console.log(`The secret is: ${myDecryptedValue}`))
   .catch((err) => console.error(`Something went wrong: ${err.message}`));
 ```
