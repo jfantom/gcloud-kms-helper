@@ -79,7 +79,7 @@ You can import the encrypt / decrypt methods in your script:
 encrypt(message, outputFile, options)
 ```
 
-#### argurments
+#### arguments
 
 * `message`: string. Required. The message to encrypt
 * `outputFile`: string. Required. The path of the file where to output the encrypted message.
@@ -115,10 +115,10 @@ encrypt('my message to encrypt', './output.key', options)
 ---
 
 ```javascript
-decrypt(message, outputFile, options)
+decrypt(inputFile, options)
 ```
 
-#### argurments
+#### arguments
 
 * `inputFile`: string. Required. The path of the file where we can find the message to decrypt.
 * `options`: object. Required. The options mentionned before.
@@ -156,7 +156,7 @@ decrypt('./output.key', options)
 decryptFromBuffer(message, outputFile, options)
 ```
 
-#### argurments
+#### arguments
 
 * `buff`: string or buffer. Required. The buffer or the string to decrypt.
 * `options`: object. Required. The options mentionned before.
